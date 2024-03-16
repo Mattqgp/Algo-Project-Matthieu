@@ -8,7 +8,7 @@ public class MoveEnemy : MonoBehaviour
 
     public float Speed;
 
-    private float Health;
+    public float Health = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,10 @@ public class MoveEnemy : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             Health -= 1;
-            collision.gameObject.GetComponent<BulletMove>().hit();
+            if (Health == 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
