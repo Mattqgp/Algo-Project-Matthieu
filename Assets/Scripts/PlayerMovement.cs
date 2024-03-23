@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Camera;
 
     public float speed = 2f;
-    public float rotateSpeed = 30f;
+    public float rotateSpeed = 1f;
+    public float jumpForce = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,11 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetAxis("Mouse Y") > 0)
         {
             Camera.transform.Rotate(-YRotateDir);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Rb.velocity = new Vector3(Rb.velocity.x, jumpForce, Rb.velocity.z);
         }
     }
 }

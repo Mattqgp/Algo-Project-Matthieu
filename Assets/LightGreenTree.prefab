@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 50fb80dcb6045e64e8ef5d9abbfc1c97, type: 2}
     - target: {fileID: 7274616093143845118, guid: 3135159fbfbe5fa4f8ecbd53495afee2, type: 3}
       propertyPath: m_Name
-      value: Tree (2)
+      value: LightGreenTree
       objectReference: {fileID: 0}
     - target: {fileID: 7653522250964135508, guid: 3135159fbfbe5fa4f8ecbd53495afee2, type: 3}
       propertyPath: m_RootOrder
@@ -25,11 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7653522250964135508, guid: 3135159fbfbe5fa4f8ecbd53495afee2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 7653522250964135508, guid: 3135159fbfbe5fa4f8ecbd53495afee2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.6599998
+      value: -4.84
       objectReference: {fileID: 0}
     - target: {fileID: 7653522250964135508, guid: 3135159fbfbe5fa4f8ecbd53495afee2, type: 3}
       propertyPath: m_LocalRotation.w
