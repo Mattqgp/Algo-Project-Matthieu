@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    public List<GameObject> enemies = new List<GameObject>();
+    public GameObject enemy;
 
     public float spawnOffset = 3;
 
@@ -22,8 +22,7 @@ public class SpawnEnemy : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= spawnDelay)
         {
-            int randomNum = Random.Range(0, enemies.Count);
-            Instantiate(enemies[randomNum], transform.position + new Vector3(Random.Range(0, spawnOffset), Random.Range(0, spawnOffset), Random.Range(0, spawnOffset)), transform.rotation);
+            Instantiate(enemy, transform.position + new Vector3(Random.Range(0, spawnOffset), Random.Range(0, spawnOffset), Random.Range(0, spawnOffset)), transform.rotation);
             timer = 0f;
         }
     }

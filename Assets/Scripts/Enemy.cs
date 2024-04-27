@@ -13,13 +13,15 @@ public class Enemy : MonoBehaviour
     public List<Vector3> collSize = new List<Vector3>();
     public List<Vector3> collOffset = new List<Vector3>();
 
+    public float speed;
+
     // Start is called before the first frame update
     void Start()
     {
-        int randomNum = Random.Range(0, meshes.Count);
-        //meshFilter.mesh = meshes[randomNum];
-        //coll.center = collOffset[randomNum];
-        //coll.size = collSize[randomNum];
+        int randomNum = Random.Range(0, 3);
+        meshFilter.mesh = meshes[randomNum];
+        coll.center = collOffset[randomNum];
+        coll.size = collSize[randomNum];
 
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -27,7 +29,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 lookDir = player.transform.position - transform.position;
-        transform.rotation = Quaternion.Euler(lookDir);
+        if (player)
+        {
+            Vector3 playerLookAt = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+            transform.LookAt(playerLookAt);
+
+            transform.position = Vector3.MoveTowards(transform.position, playerLookAt, speed * Time.deltaTime);
+        }
     }
 }

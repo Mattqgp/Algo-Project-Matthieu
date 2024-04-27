@@ -14,7 +14,7 @@ public class LookAtPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 playerLookAt = new Vector3(-90, transform.position.y, player.transform.position.z);
+        Vector3 playerLookAt = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         transform.LookAt(playerLookAt);
     }
 }
