@@ -15,6 +15,12 @@ public class Enemy : MonoBehaviour
 
     public float speed;
 
+    public int health = 100;
+
+    public int damage = 30;
+
+    public float knockback = 1000f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +41,31 @@ public class Enemy : MonoBehaviour
             transform.LookAt(playerLookAt);
 
             transform.position = Vector3.MoveTowards(transform.position, playerLookAt, speed * Time.deltaTime);
+        }
+    }
+
+    public void TakeDamage(int damage){
+        health -= damage;
+
+        if (health <= 0f){
+            Die();
+        }
+    }
+
+    void Die(){
+        Destroy(gameObject);
+    }
+
+    void OnCollisionEnter(Collision other) {
+        if (other.gameObject.CompareTag("Player")){
+            PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();
+
+            player.TakeDamage(damage);
+
+            Rigidbody Rb = other.gameObject.GetComponent<Rigidbody>();
+
+            Vector3 knockbackDir = (other.gameObject.transform.position - transform.position) * knockback;
+            Rb.AddForce(knockbackDir, ForceMode.Impulse);
         }
     }
 }
