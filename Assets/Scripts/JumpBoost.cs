@@ -7,35 +7,37 @@ public class JumpBoost : MonoBehaviour
     public float jumpForce = 15f;
     float startJump;
 
-    public float timer = 5f;
-
     PlayerMovement player;
 
-    void OnTriggerEnter(Collider other)
+    public float duration = 5f;
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            player = other.gameObject.GetComponent<PlayerMovement>();
+            player = other.GetComponent<PlayerMovement>();
 
             startJump = player.jumpForce;
 
             player.jumpForce = jumpForce;
 
-            StartCoroutine(Destroy(timer));
+            StartCoroutine(Destroy());
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            player = other.GetComponent<PlayerMovement>();
+
             player.jumpForce = startJump;
         }
     }
 
-    IEnumerator Destroy(float delay)
+    IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(duration);
 
         player.jumpForce = startJump;
 

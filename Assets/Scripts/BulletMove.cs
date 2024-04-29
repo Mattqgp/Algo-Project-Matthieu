@@ -6,7 +6,7 @@ public class BulletMove : MonoBehaviour
 {
     public float Speed = 5f;
 
-    public int damage = 70;
+    public int damage = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +20,12 @@ public class BulletMove : MonoBehaviour
         transform.Translate(0, 0, Speed * Time.deltaTime);
     }
 
-    void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Enemy")){
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-
-            enemy.TakeDamage(damage);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Health health = other.GetComponent<Health>();
+            health.TakeDamage(damage);
         }
 
         Destroy(gameObject);

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,8 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 2f;
     public float rotateSpeed = 1f;
     public float jumpForce = 5f;
-
-    public int health = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -53,20 +50,5 @@ public class PlayerMovement : MonoBehaviour
         {
             Rb.velocity = new Vector3(Rb.velocity.x, jumpForce, Rb.velocity.z);
         }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0f)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

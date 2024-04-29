@@ -131,9 +131,11 @@ GameObject:
   - component: {fileID: 6620296749366852117}
   - component: {fileID: 6620296749366852116}
   - component: {fileID: 670137466}
+  - component: {fileID: 8754816865929874920}
+  - component: {fileID: 6581154074539198945}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 6620296748104920031}
   speed: 3
-  rotateSpeed: 2
+  rotateSpeed: 1.8
   jumpForce: 5
 --- !u!54 &6620296749366852116
 Rigidbody:
@@ -265,6 +267,32 @@ MonoBehaviour:
   Bullet: {fileID: 4168959426948691481, guid: 2ad57415837c93747b1fac273eb3ae08, type: 3}
   ShootStart: {fileID: 4617047096454117881}
   Camera: {fileID: 6620296748104920028}
+--- !u!114 &8754816865929874920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620296749366852106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6645b3e356c414e8c1e62123c8323e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+--- !u!114 &6581154074539198945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620296749366852106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25336aa45f644684c9f974065ad1904e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 0
 --- !u!1001 &6620296749839586302
 PrefabInstance:
   m_ObjectHideFlags: 0

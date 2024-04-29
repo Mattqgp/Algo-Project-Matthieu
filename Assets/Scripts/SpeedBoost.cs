@@ -7,37 +7,37 @@ public class SpeedBoost : MonoBehaviour
     public float speed = 15f;
     float startSpeed;
 
-    public float timer = 5f;
-
     PlayerMovement player;
 
-    void OnTriggerEnter(Collider other)
+    public float duration = 5f;
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            player = other.gameObject.GetComponent<PlayerMovement>();
+            player = other.GetComponent<PlayerMovement>();
 
             startSpeed = player.speed;
 
             player.speed = speed;
 
-            StartCoroutine(Destroy(timer));
+            StartCoroutine(Destroy());
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            player = other.gameObject.GetComponent<PlayerMovement>();
+            player = other.GetComponent<PlayerMovement>();
 
             player.speed = startSpeed;
         }
     }
 
-    IEnumerator Destroy(float delay)
+    IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(duration);
 
         player.speed = startSpeed;
 
