@@ -7,6 +7,8 @@ public class Health : MonoBehaviour
 {
     public int health = 100;
 
+    public GameObject[] loot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,11 @@ public class Health : MonoBehaviour
 
     void Die()
     {
+        if (loot.Length > 0)
+        {
+            SpawnLoot();
+        }
+
         if (gameObject.CompareTag("Player"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -38,6 +45,14 @@ public class Health : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void SpawnLoot()
+    {
+        foreach(GameObject lootObject in loot)
+        {
+            Instantiate(lootObject, new Vector3(transform.position.x, 1, transform.position.z), transform.rotation);
         }
     }
 }

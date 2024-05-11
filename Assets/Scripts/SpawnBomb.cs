@@ -10,12 +10,12 @@ public class SpawnBomb : MonoBehaviour
 
     public float throwDistance;
 
-    GameObject playerCamera;
+    public GameObject playerCamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerCamera = Camera.main.gameObject;
+
     }
 
     // Update is called once per frame
@@ -23,7 +23,8 @@ public class SpawnBomb : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && bombStock > 0)
         {
-            GameObject bombClone = Instantiate(bomb, playerCamera.transform.forward * 2, playerCamera.transform.rotation);
+            Debug.Log(playerCamera.transform.position);
+            GameObject bombClone = Instantiate(bomb, playerCamera.transform.position + (transform.forward * 2), playerCamera.transform.rotation);
             bombStock -= 1;
             Rigidbody bombRb = bombClone.GetComponent<Rigidbody>();
             bombRb.AddForce((bombClone.transform.position - playerCamera.transform.position) * throwDistance, ForceMode.Impulse);

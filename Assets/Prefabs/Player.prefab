@@ -337,6 +337,7 @@ MonoBehaviour:
   bombStock: 0
   bomb: {fileID: 4869617833129813875, guid: c81664727640e8f45a391a736c845e91, type: 3}
   throwDistance: 5
+  playerCamera: {fileID: 6620296748104920031}
 --- !u!1001 &6620296749839586302
 PrefabInstance:
   m_ObjectHideFlags: 0
