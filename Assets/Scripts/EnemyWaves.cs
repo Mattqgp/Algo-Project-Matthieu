@@ -1,24 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyWaves : MonoBehaviour
 {
     public GameObject enemy;
-
     public float spawnOffset = 3;
-
-    public int amount = 5;
+    public int amount = 1;
+    int enemyCount = 0;
+    GameObject[] enemies;
+    bool enemiesInLevel;
+    public float spawnDelay = 1f;
+    List<Transform> spawnPoints = new();
 
     public int level;
 
-    int enemyCount = 0;
-
-    bool enemiesInLevel;
-
-    float delay = 10f;
-
-    List<Transform> spawnPoints = new();
+    public TextMeshProUGUI counter;
 
     // Start is called before the first frame update
     void Start()
@@ -32,35 +31,48 @@ public class EnemyWaves : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0 && enemyCount < amount)
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (enemies.Length > 0 && enemyCount > 0)
         {
             enemiesInLevel = true;
         }else
         {
             enemiesInLevel = false;
         }
-    }
 
-    public void NextWave()
-    {
-        Debug.Log(enemiesInLevel);
+        counter.text = "X " + enemies.Length.ToString();
 
-        if (!enemiesInLevel)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            level++;
-            amount *= 2;
-
-            foreach (Transform t in spawnPoints)
+            if (enemiesInLevel == false)
             {
-                SpawnEnemies(t.position);
+                NextWave();
             }
         }
     }
 
-    void SpawnEnemies(Vector3 position)
+    public void NextWave()
     {
-        for (int i = amount; i > 0; i--)
+        if (!enemiesInLevel)
         {
+            level++;
+            amount = Mathf.RoundToInt(amount * 1.5f);
+
+            foreach (Transform t in spawnPoints)
+            {
+                StartCoroutine(SpawnEnemies(t.position));
+            }
+        }
+    }
+
+    IEnumerator SpawnEnemies(Vector3 position)
+    {
+
+        for (int i = Mathf.FloorToInt(amount / spawnPoints.Count); i > 0; i--)
+        {
+            yield return new WaitForSeconds(spawnDelay);
+
             float ranX = Random.Range(0, spawnOffset);
             float ranY = Random.Range(0, spawnOffset);
             float ranZ = Random.Range(0, spawnOffset);

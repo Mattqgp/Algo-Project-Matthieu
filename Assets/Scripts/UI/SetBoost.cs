@@ -11,7 +11,6 @@ public class SetBoost : MonoBehaviour
 
     string activeBoost;
     Color boostColor;
-    bool hasBoost;
 
     public string[] boosts;
     public Color[] color;
@@ -40,15 +39,6 @@ public class SetBoost : MonoBehaviour
         {
             activeBoost = null;
             boostColor = new Vector4(0, 0, 0, 0);
-        }
-
-        if (activeBoost != null)
-        {
-            hasBoost = true;
-        }
-        else
-        {
-            hasBoost = false;
         }
 
         arrow.color = boostColor;
