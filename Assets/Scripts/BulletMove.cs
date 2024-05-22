@@ -28,6 +28,18 @@ public class BulletMove : MonoBehaviour
             health.TakeDamage(damage);
         }
 
+        if (other.CompareTag("Boss"))
+        {
+            Health health = other.GetComponent<Health>();
+            health.TakeDamage(2);
+        }
+
+        if (other.CompareTag("BossEye"))
+        {
+            Health health = other.GetComponentInParent<Health>();
+            health.TakeDamage(20);
+        }
+
         Destroy(gameObject);
     }
 }

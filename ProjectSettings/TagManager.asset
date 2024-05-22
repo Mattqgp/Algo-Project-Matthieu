@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Collectable
   - EnemySpawner
+  - Boss
+  - BossEye
   layers:
   - Default
   - TransparentFX

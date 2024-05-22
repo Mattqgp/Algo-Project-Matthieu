@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1591238619117971357}
   m_Layer: 0
   m_Name: Eye
-  m_TagString: Untagged
+  m_TagString: BossEye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,9 +133,10 @@ GameObject:
   - component: {fileID: 6413834615392678408}
   - component: {fileID: 2937475042883218432}
   - component: {fileID: 4488497428636936338}
+  - component: {fileID: 8812816073568846442}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 5475897451464286197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.69, y: 4.5, z: -21.28}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -276,6 +277,23 @@ MonoBehaviour:
   eye: {fileID: 6226240123481462055}
   eyeTip: {fileID: 8255563372798931685}
   beam: {fileID: 4189591833945651220, guid: bb7a1fba8cc2de349842714b89107ce8, type: 3}
+  touchDamage: 10
+  beamDamage: 20
+  beamDamageDelay: 2
+--- !u!114 &8812816073568846442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5475897451464286197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6645b3e356c414e8c1e62123c8323e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  loot: []
 --- !u!1 &7473373336920362013
 GameObject:
   m_ObjectHideFlags: 0

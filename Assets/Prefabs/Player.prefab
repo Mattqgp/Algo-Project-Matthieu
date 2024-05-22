@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6645b3e356c414e8c1e62123c8323e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 100
   loot: []
 --- !u!114 &6581154074539198945
 MonoBehaviour:

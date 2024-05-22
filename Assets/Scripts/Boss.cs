@@ -21,8 +21,10 @@ public class Boss : MonoBehaviour
     public GameObject beam;
     Transform laser;
 
-    public int touchDamage = 10;
-    public int beamDamage = 20;
+    public int touchDamage = 5;
+    public int beamDamage = 10;
+    bool isBeamAttacking;
+    public float beamDamageDelay = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +43,10 @@ public class Boss : MonoBehaviour
         Move();
 
         Beam();
+    }
 
+    private void FixedUpdate()
+    {
         Look();
     }
 
@@ -76,13 +81,13 @@ public class Boss : MonoBehaviour
 
     void Look()
     {
-        Collider[] sights = Physics.OverlapSphere(transform.position, visionRadius, playerLayer);
+        Collider[] sights = Physics.OverlapSphere(transform.position, visionRadius);
 
-        for(int i = 0; i < sights.Length; i++)
+        foreach(Collider coll in sights)
         {
-            if (sights[i].CompareTag("Player"))
+            if (coll.CompareTag("Player"))
             {
-                seesPlayer = true; break;
+                seesPlayer = true;
             }
             else
             {
@@ -95,15 +100,36 @@ public class Boss : MonoBehaviour
     {
         if (seesPlayer)
         {
-            Physics.SphereCast(eyeTip.position, 0.5f, eyeTip.position - eye.position, out RaycastHit hit);
+            bool laserHit = Physics.SphereCast(eyeTip.position, 0.5f, eyeTip.position - eye.position, out RaycastHit hit);
 
             laser.LookAt(eye.position);
             laser.position = eye.position + ((eyeTip.transform.position - eye.position).normalized * (hit.distance / 2));
             laser.localScale = new Vector3(laser.transform.localScale.x, laser.transform.localScale.y, hit.distance / 2);
+
+            if (laserHit && hit.collider.CompareTag("Player"))
+            {
+                StartCoroutine(BeamDamge(hit.collider.gameObject));
+            }
         }
         else
         {
             laser.position = new Vector3(0, -1000, 0);
+        }
+    }
+
+    IEnumerator BeamDamge(GameObject playerObject)
+    {
+        if (!isBeamAttacking)
+        {
+            isBeamAttacking = true;
+
+            Health healthScript = playerObject.GetComponent<Health>();
+
+            healthScript.TakeDamage(beamDamage);
+
+            yield return new WaitForSeconds(beamDamageDelay);
+
+            isBeamAttacking = false;
         }
     }
 }
