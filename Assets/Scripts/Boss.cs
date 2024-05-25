@@ -8,12 +8,16 @@ public class Boss : MonoBehaviour
     GameObject player;
     Vector3 playerPos;
 
+    public Rigidbody rb;
+
     public float moveSpeed = 5f;
     public float jumpForce = 15f;
     bool canJump;
-    public float visionRadius;
-    public LayerMask playerLayer;
-    public bool seesPlayer;
+
+    public float laserVisionRadius;
+    public float crushVisionRadius;
+    public bool laserSeesPlayer;
+    public bool crushSeesPlayer;
 
     public Transform eye;
     public Transform eyeTip;
@@ -21,10 +25,23 @@ public class Boss : MonoBehaviour
     public GameObject beam;
     Transform laser;
 
+    int attack;
     public int touchDamage = 5;
+
+    //Beam
     public int beamDamage = 10;
     bool isBeamAttacking;
     public float beamDamageDelay = 1f;
+
+    //Crush
+    public float jumpHeight;
+    public float jumpSpeed;
+    public float airTime;
+    float timer;
+    public float hoverSpeed;
+    public float crushSpeed;
+    public float knockback;
+    bool isCrushing;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +59,7 @@ public class Boss : MonoBehaviour
         transform.LookAt(playerPos);
         Move();
 
-        Beam();
+        Attack();
     }
 
     private void FixedUpdate()
@@ -76,29 +93,122 @@ public class Boss : MonoBehaviour
             Health healthScript = collision.collider.GetComponent<Health>();
 
             healthScript.TakeDamage(touchDamage);
+
+            GameObject hitObject = collision.gameObject;
+            Vector3 knockbackDir = hitObject.transform.position - transform.position;
+            Rigidbody plrRb = hitObject.GetComponent<Rigidbody>();
+
+            plrRb.isKinematic = false;
+            plrRb.AddForce(new Vector3(knockbackDir.x, 50, knockbackDir.z).normalized * knockback, ForceMode.Impulse);
         }
     }
 
     void Look()
     {
-        Collider[] sights = Physics.OverlapSphere(transform.position, visionRadius);
+        Collider[] laserSights = Physics.OverlapSphere(transform.position, laserVisionRadius);
+        Collider[] crushSights = Physics.OverlapSphere(transform.position, crushVisionRadius);
 
-        foreach(Collider coll in sights)
+        foreach(Collider coll in laserSights)
         {
             if (coll.CompareTag("Player"))
             {
-                seesPlayer = true;
+                laserSeesPlayer = true; break;
             }
             else
             {
-                seesPlayer = false;
+                laserSeesPlayer = false;
             }
+        }
+
+        foreach(Collider coll in crushSights)
+        {
+            if (coll.CompareTag("Player"))
+            {
+                crushSeesPlayer = true; break;
+            }
+            else
+            {
+                crushSeesPlayer = false;
+            }
+        }
+
+        if (laserSeesPlayer && !crushSeesPlayer && !isCrushing)
+        {
+            attack = 1;
+        }
+        else if ((laserSeesPlayer && crushSeesPlayer) || (!laserSeesPlayer && crushSeesPlayer) && !isCrushing)
+        {
+            attack = 2;
+        }
+        else if(!laserSeesPlayer && !crushSeesPlayer && !isCrushing)
+        {
+            attack = 0;
         }
     }
 
+    void Attack()
+    {
+        if (attack == 0)
+        {
+            return;
+        }else if (attack == 1)
+        {
+            Beam();
+        }else if (attack == 2)
+        {
+            StartCoroutine(Crush());
+        }
+    }
+
+    IEnumerator Crush()
+    {
+        isCrushing = true;
+
+        timer = 0f;
+
+        while (transform.position.y != jumpHeight)
+        {
+            JumpToTop();
+            yield return null;
+        }
+
+        while (timer < airTime)
+        {
+            timer += Time.deltaTime;
+
+            Hover();
+
+            yield return null;
+        }
+
+        CrushTarget();
+
+        isCrushing = false;
+    }
+
+    void JumpToTop()
+    {
+        Vector3 targetPos = new(player.transform.position.x, jumpHeight, player.transform.position.y);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, jumpSpeed);
+        rb.isKinematic = true;
+    }
+
+    void Hover()
+    {
+        Vector3 targetPos = new(player.transform.position.x, jumpHeight, player.transform.position.y);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, hoverSpeed);
+    }
+
+    void CrushTarget()
+    {
+        rb.isKinematic = false;
+        rb.AddForce(Vector3.down * crushSpeed, ForceMode.Impulse);
+    }
+
+
     void Beam()
     {
-        if (seesPlayer)
+        if (laserSeesPlayer)
         {
             bool laserHit = Physics.SphereCast(eyeTip.position, 0.5f, eyeTip.position - eye.position, out RaycastHit hit);
 
