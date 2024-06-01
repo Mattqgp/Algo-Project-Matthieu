@@ -5,35 +5,45 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Boss : MonoBehaviour
 {
+    #region
+
+    [Header("References")]
     GameObject player;
     Vector3 playerPos;
-
-    public Rigidbody rb;
-
-    public float moveSpeed = 5f;
-    public float jumpForce = 15f;
-    bool canJump;
-
-    public float laserVisionRadius;
-    public float crushVisionRadius;
-    public bool laserSeesPlayer;
-    public bool crushSeesPlayer;
 
     public Transform eye;
     public Transform eyeTip;
 
+    public Rigidbody rb;
+    public Animator anim;
+
     public GameObject beam;
     Transform laser;
 
+    [Header("General")]
+    public float moveSpeed = 5f;
+    public float jumpForce = 15f;
+    bool canJump;
     int attack;
     public int touchDamage = 5;
 
-    //Beam
+    #region
+    [Header("Vision")]
+    public float laserVisionRadius;
+    public float crushVisionRadius;
+    bool laserSeesPlayer;
+    bool crushSeesPlayer;
+    #endregion
+
+    #region
+    [Header("Beam")]
     public int beamDamage = 10;
     bool isBeamAttacking;
     public float beamDamageDelay = 1f;
+    #endregion
 
-    //Crush
+    #region
+    [Header("Crushing")]
     public float jumpHeight;
     public float jumpSpeed;
     public float airTime;
@@ -42,7 +52,12 @@ public class Boss : MonoBehaviour
     public float crushSpeed;
     public float knockback;
     bool isCrushing;
+    #endregion
 
+    #endregion
+
+    #region
+    #region
     // Start is called before the first frame update
     void Start()
     {
@@ -60,12 +75,21 @@ public class Boss : MonoBehaviour
         Move();
 
         Attack();
+
+        if (isCrushing)
+        {
+            laserSeesPlayer = false;
+            laser.position = new Vector3(0, -1000, 0);
+        }
     }
 
     private void FixedUpdate()
     {
         Look();
     }
+    #endregion
+
+    #region
 
     void Move()
     {
@@ -77,6 +101,8 @@ public class Boss : MonoBehaviour
     {
         if (canJump)
         {
+            anim.SetTrigger("Jump");
+
             Rigidbody Rb = GetComponent<Rigidbody>();
             Rb.velocity = new Vector3(0, jumpForce, 0);
 
@@ -84,12 +110,17 @@ public class Boss : MonoBehaviour
         }
     }
 
+    #endregion
+
     private void OnCollisionEnter(Collision collision)
     {
+        anim.SetTrigger("Spin");
+
         canJump = true;
 
         if (collision.collider.CompareTag("Player"))
         {
+
             Health healthScript = collision.collider.GetComponent<Health>();
 
             healthScript.TakeDamage(touchDamage);
@@ -146,6 +177,8 @@ public class Boss : MonoBehaviour
         }
     }
 
+    #region
+
     void Attack()
     {
         if (attack == 0)
@@ -160,30 +193,37 @@ public class Boss : MonoBehaviour
         }
     }
 
+    #region
     IEnumerator Crush()
     {
-        isCrushing = true;
-
-        timer = 0f;
-
-        while (transform.position.y != jumpHeight)
+        if (!isCrushing && canJump)
         {
-            JumpToTop();
-            yield return null;
+            isCrushing = true;
+
+            timer = 0f;
+
+            while (transform.position.y != jumpHeight)
+            {
+                JumpToTop();
+                yield return null;
+            }
+
+            while (timer < airTime)
+            {
+                timer += Time.deltaTime;
+
+                Hover();
+
+                yield return null;
+            }
+
+            anim.SetTrigger("Spin");
+            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(anim.GetLayerIndex("Base Layer")).length);
+
+            CrushTarget();
+
+            isCrushing = false;
         }
-
-        while (timer < airTime)
-        {
-            timer += Time.deltaTime;
-
-            Hover();
-
-            yield return null;
-        }
-
-        CrushTarget();
-
-        isCrushing = false;
     }
 
     void JumpToTop()
@@ -204,8 +244,9 @@ public class Boss : MonoBehaviour
         rb.isKinematic = false;
         rb.AddForce(Vector3.down * crushSpeed, ForceMode.Impulse);
     }
+    #endregion
 
-
+    #region
     void Beam()
     {
         if (laserSeesPlayer)
@@ -242,4 +283,9 @@ public class Boss : MonoBehaviour
             isBeamAttacking = false;
         }
     }
+    #endregion
+
+    #endregion
+
+    #endregion
 }
