@@ -64,7 +64,7 @@ public class EnemyWaves : MonoBehaviour
             level++;
             amount = Mathf.RoundToInt(amount * 1.5f);
 
-            if (level >= 1)
+            if (level >= 10)
             {
                 SpawnBoss();
             }

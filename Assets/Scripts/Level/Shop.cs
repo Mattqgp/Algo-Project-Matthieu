@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    public int maxBombs = 10;
-    public int cost = 2;
+    public GameObject shopPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -21,17 +21,19 @@ public class Shop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            SpawnBomb bombScript = other.gameObject.GetComponent<SpawnBomb>();
-            Pickup coinScript = other.gameObject.GetComponent<Pickup>();
+            Cursor.lockState = CursorLockMode.None;
+            shopPanel.SetActive(true);
+        }
+    }
 
-            if (bombScript.bombStock < maxBombs && coinScript.points >= cost)
-            {
-                coinScript.points -= cost;
-                bombScript.bombStock += 1;
-
-            }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            shopPanel.SetActive(false);
         }
     }
 }
