@@ -8,6 +8,8 @@ public class SpawnBullets : MonoBehaviour
     public Transform ShootStart;
     public Transform Camera;
 
+    public int damage = 40;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,11 @@ public class SpawnBullets : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(Bullet, ShootStart.position, Camera.rotation);
+            GameObject bullet = Instantiate(Bullet, ShootStart.position, Camera.rotation);
+
+            BulletMove bulletScript = bullet.GetComponent<BulletMove>();
+
+            bulletScript.damage = damage;
         }
     }
 }

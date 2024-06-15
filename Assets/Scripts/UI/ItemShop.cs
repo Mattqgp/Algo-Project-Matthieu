@@ -10,6 +10,7 @@ public class ItemShop : MonoBehaviour
     public int health;
     public float speed;
     public float jumpForce;
+    public int damage;
 
     private void Start()
     {
@@ -59,6 +60,17 @@ public class ItemShop : MonoBehaviour
         {
             coinScript.points -= cost;
             moveScript.jumpForce += jumpForce;
+        }
+    }
+
+    public void BuyDamage(int cost)
+    {
+        SpawnBullets bulletScript = player.GetComponent<SpawnBullets>();
+
+        if (coinScript.points >= cost)
+        {
+            coinScript.points -= cost;
+            bulletScript.damage += damage;
         }
     }
 }

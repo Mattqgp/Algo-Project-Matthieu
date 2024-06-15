@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.449386, g: 0.4962818, b: 0.5586446, a: 1}
+  m_IndirectSpecularColor: {r: 0.44938576, g: 0.4962815, b: 0.5586441, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: a0545d5efa241cc479077a96c498b8ab, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -2737,6 +2737,7 @@ MonoBehaviour:
   health: 20
   speed: 0.5
   jumpForce: 1
+  damage: 2
 --- !u!1001 &830214573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3578,7 +3579,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1157133762}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 783422434}
+        m_TargetAssemblyTypeName: ItemShop, Assembly-CSharp
+        m_MethodName: BuyDamage
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1157133762
 MonoBehaviour:
   m_ObjectHideFlags: 0
