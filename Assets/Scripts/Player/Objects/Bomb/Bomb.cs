@@ -38,4 +38,9 @@ public class Bomb : MonoBehaviour
         
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 8);
+    }
 }

@@ -15,6 +15,8 @@ public class SpeedBoost : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 9);
+
             player = other.GetComponent<PlayerMovement>();
 
             startSpeed = player.speed;

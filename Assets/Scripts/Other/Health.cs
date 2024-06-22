@@ -41,6 +41,13 @@ public class Health : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        else if (gameObject.CompareTag("Enemy"))
+        {
+            int ran = Random.Range(1, 5);
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, ran);
+
+            Destroy(gameObject, 0.2f);
+        }
         else
         {
             Destroy(gameObject);

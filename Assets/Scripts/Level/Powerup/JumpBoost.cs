@@ -15,6 +15,8 @@ public class JumpBoost : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 9);
+
             player = other.GetComponent<PlayerMovement>();
 
             startJump = player.jumpForce;

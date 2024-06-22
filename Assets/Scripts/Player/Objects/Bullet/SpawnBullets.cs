@@ -21,6 +21,8 @@ public class SpawnBullets : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 0);
+
             GameObject bullet = Instantiate(Bullet, ShootStart.position, Camera.rotation);
 
             BulletMove bulletScript = bullet.GetComponent<BulletMove>();

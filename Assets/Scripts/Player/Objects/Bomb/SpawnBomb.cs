@@ -23,7 +23,8 @@ public class SpawnBomb : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && bombStock > 0)
         {
-            Debug.Log(playerCamera.transform.position);
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 7);
+
             GameObject bombClone = Instantiate(bomb, playerCamera.transform.position + (transform.forward * 2), playerCamera.transform.rotation);
             bombStock -= 1;
             Rigidbody bombRb = bombClone.GetComponent<Rigidbody>();

@@ -10,6 +10,7 @@ TagManager:
   - EnemySpawner
   - Boss
   - BossEye
+  - AudioManager
   layers:
   - Default
   - TransparentFX

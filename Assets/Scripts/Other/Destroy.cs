@@ -9,17 +9,6 @@ public class Destroy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("DestroyObject", delay);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void DestroyObject()
-    {
-        Destroy(gameObject);
+        Destroy(gameObject, delay);
     }
 }
