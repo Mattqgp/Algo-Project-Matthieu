@@ -11,6 +11,7 @@ TagManager:
   - Boss
   - BossEye
   - AudioManager
+  - WavesManager
   layers:
   - Default
   - TransparentFX

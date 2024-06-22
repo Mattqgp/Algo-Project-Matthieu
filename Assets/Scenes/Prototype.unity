@@ -2077,7 +2077,7 @@ GameObject:
   - component: {fileID: 599956864}
   m_Layer: 0
   m_Name: Spawners
-  m_TagString: Untagged
+  m_TagString: WavesManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4177,6 +4177,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 705d9285ed4fbf44bb8de3b4f75ff969, type: 3}
   - {fileID: 8300000, guid: fa16bd6cbe8bcba40ad0f5c9644c9607, type: 3}
   - {fileID: 8300000, guid: e710da79f22cf834fbfaf741ad610377, type: 3}
+  - {fileID: 8300000, guid: fc96116dc3c141440aabb5605744fea2, type: 3}
+  - {fileID: 8300000, guid: 8ad8e1b7041dd394aa92aad52c8636e5, type: 3}
 --- !u!1 &1436870659
 GameObject:
   m_ObjectHideFlags: 0

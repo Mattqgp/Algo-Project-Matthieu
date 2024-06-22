@@ -76,10 +76,15 @@ public class Boss : MonoBehaviour
 
         Attack();
 
-        if (isCrushing)
+        if (attack == 2 || attack == 0)
         {
             laserSeesPlayer = false;
             laser.position = new Vector3(0, -1000, 0);
+            laser.GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            laser.GetComponentInChildren<MeshRenderer>().enabled = true;
         }
     }
 
@@ -101,6 +106,8 @@ public class Boss : MonoBehaviour
     {
         if (canJump)
         {
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 10);
+
             anim.SetTrigger("Jump");
 
             Rigidbody Rb = GetComponent<Rigidbody>();
@@ -120,6 +127,7 @@ public class Boss : MonoBehaviour
 
         if (collision.collider.CompareTag("Player"))
         {
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 11);
 
             Health healthScript = collision.collider.GetComponent<Health>();
 
@@ -196,7 +204,7 @@ public class Boss : MonoBehaviour
     #region
     IEnumerator Crush()
     {
-        if (!isCrushing && canJump)
+        if (!isCrushing)
         {
             isCrushing = true;
 
@@ -222,20 +230,24 @@ public class Boss : MonoBehaviour
 
             CrushTarget();
 
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 10);
+
+            yield return new WaitForSeconds(7f);
+
             isCrushing = false;
         }
     }
 
     void JumpToTop()
     {
-        Vector3 targetPos = new(player.transform.position.x, jumpHeight, player.transform.position.y);
+        Vector3 targetPos = new(player.transform.position.x, jumpHeight, player.transform.position.z);
         transform.position = Vector3.MoveTowards(transform.position, targetPos, jumpSpeed);
         rb.isKinematic = true;
     }
 
     void Hover()
     {
-        Vector3 targetPos = new(player.transform.position.x, jumpHeight, player.transform.position.y);
+        Vector3 targetPos = new(player.transform.position.x, jumpHeight, player.transform.position.z);
         transform.position = Vector3.MoveTowards(transform.position, targetPos, hoverSpeed);
     }
 

@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 11);
+
             Health health = other.gameObject.GetComponent<Health>();
             health.TakeDamage(damage);
         }

@@ -22,4 +22,9 @@ public class MainMenu : MonoBehaviour
     {
         settings.SetActive(open);
     }
+
+    public void PlaySound(int sound)
+    {
+        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, sound);
+    }
 }
