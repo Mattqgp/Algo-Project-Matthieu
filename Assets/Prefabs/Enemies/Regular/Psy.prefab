@@ -185,7 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  loot: []
+  loot:
+  - {fileID: 4371687554689337115, guid: 49c3b5249ca511e4aabb95a76727d5f4, type: 3}
 --- !u!54 &6686098056928063648
 Rigidbody:
   m_ObjectHideFlags: 0

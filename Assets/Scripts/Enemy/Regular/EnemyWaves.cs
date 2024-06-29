@@ -55,6 +55,15 @@ public class EnemyWaves : MonoBehaviour
                 NextWave();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.CapsLock))
+        {
+            if (enemiesInLevel == false)
+            {
+                level = 7;
+                NextWave();
+            }
+        }
     }
 
     public void NextWave()
@@ -64,7 +73,7 @@ public class EnemyWaves : MonoBehaviour
             level++;
             amount = Mathf.RoundToInt(amount * 1.5f);
 
-            if (level >= 10)
+            if (level >= 7)
             {
                 SpawnBoss();
             }
