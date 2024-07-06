@@ -517,6 +517,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4706359384910461421, guid: 0858c2ab10c4d414db134567b11bf0e1, type: 3}
+      propertyPath: bombStock
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 712726123416278169, guid: 0858c2ab10c4d414db134567b11bf0e1, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6620296749366852106, guid: 0858c2ab10c4d414db134567b11bf0e1, type: 3}
       propertyPath: m_Name
       value: Player

@@ -46,6 +46,8 @@ public class Health : MonoBehaviour
             int ran = Random.Range(1, 5);
             GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, ran);
 
+            gameObject.GetComponent<Collider>().enabled = false;
+
             Destroy(gameObject, 0.2f);
         }
         else

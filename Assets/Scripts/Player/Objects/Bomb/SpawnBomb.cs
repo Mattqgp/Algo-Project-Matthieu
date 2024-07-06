@@ -12,6 +12,8 @@ public class SpawnBomb : MonoBehaviour
 
     public GameObject playerCamera;
 
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,11 @@ public class SpawnBomb : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && bombStock > 0)
         {
+            if (anim)
+            {
+                anim.SetTrigger("Throw");
+            }
+
             GameObject.FindGameObjectWithTag("AudioManager").GetComponent<Sound>().Play(gameObject, 7);
 
             GameObject bombClone = Instantiate(bomb, playerCamera.transform.position + (transform.forward * 2), playerCamera.transform.rotation);
