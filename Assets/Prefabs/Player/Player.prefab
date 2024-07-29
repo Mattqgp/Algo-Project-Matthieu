@@ -133,13 +133,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6620296749366852118}
   - component: {fileID: 6620296749366852105}
-  - component: {fileID: 6620296749366852117}
   - component: {fileID: 6620296749366852116}
+  - component: {fileID: 6122900943831509281}
+  - component: {fileID: 6620296749366852117}
   - component: {fileID: 670137466}
   - component: {fileID: 8754816865929874920}
   - component: {fileID: 6581154074539198945}
   - component: {fileID: -4706359384910461421}
-  - component: {fileID: 6122900943831509281}
   - component: {fileID: 2994863649565755686}
   m_Layer: 6
   m_Name: Player
@@ -187,22 +187,6 @@ CapsuleCollider:
   m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0, y: -0.05, z: 0}
---- !u!114 &6620296749366852117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6620296749366852106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f70eb39b7d87e64bb1b5bccb6af45e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 6620296748104920031}
-  speed: 2.5
-  rotateSpeed: 1.8
-  jumpForce: 4
 --- !u!54 &6620296749366852116
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -230,66 +214,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &670137466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6620296749366852106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fac3b7cd9cd4e864d9267e15cc994463, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bullet: {fileID: 4168959426948691481, guid: 2ad57415837c93747b1fac273eb3ae08, type: 3}
-  ShootStart: {fileID: 4617047096454117881}
-  Camera: {fileID: 6620296748104920028}
-  damage: 40
---- !u!114 &8754816865929874920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6620296749366852106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc6645b3e356c414e8c1e62123c8323e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  loot: []
---- !u!114 &6581154074539198945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6620296749366852106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25336aa45f644684c9f974065ad1904e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  points: 0
---- !u!114 &-4706359384910461421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6620296749366852106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3a6ef1981f6184e837e22985a29cc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombStock: 0
-  bomb: {fileID: 4869617833129813875, guid: c81664727640e8f45a391a736c845e91, type: 3}
-  throwDistance: 5
-  playerCamera: {fileID: 6620296748104920031}
-  anim: {fileID: 712726123416278169}
 --- !u!82 &6122900943831509281
 AudioSource:
   m_ObjectHideFlags: 0
@@ -386,6 +310,82 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6620296749366852117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620296749366852106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f70eb39b7d87e64bb1b5bccb6af45e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 6620296748104920031}
+  speed: 2.5
+  rotateSpeed: 1.8
+  jumpForce: 4
+--- !u!114 &670137466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620296749366852106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac3b7cd9cd4e864d9267e15cc994463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 4168959426948691481, guid: 2ad57415837c93747b1fac273eb3ae08, type: 3}
+  ShootStart: {fileID: 4617047096454117881}
+  Camera: {fileID: 6620296748104920028}
+  damage: 40
+--- !u!114 &8754816865929874920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620296749366852106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6645b3e356c414e8c1e62123c8323e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  loot: []
+--- !u!114 &6581154074539198945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620296749366852106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25336aa45f644684c9f974065ad1904e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 0
+--- !u!114 &-4706359384910461421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620296749366852106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa3a6ef1981f6184e837e22985a29cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombStock: 0
+  bomb: {fileID: 4869617833129813875, guid: c81664727640e8f45a391a736c845e91, type: 3}
+  throwDistance: 5
+  playerCamera: {fileID: 6620296748104920031}
+  anim: {fileID: 712726123416278169}
 --- !u!114 &2994863649565755686
 MonoBehaviour:
   m_ObjectHideFlags: 0
