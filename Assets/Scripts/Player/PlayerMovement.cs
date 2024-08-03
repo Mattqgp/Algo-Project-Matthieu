@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 2f;
     public float rotateSpeed = 1f;
     public float jumpForce = 5f;
+    bool canJump = true;
 
     // Start is called before the first frame update
     void Start()
@@ -46,9 +47,19 @@ public class PlayerMovement : MonoBehaviour
             Camera.transform.Rotate(-YRotateDir);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             Rb.velocity = new Vector3(Rb.velocity.x, jumpForce, Rb.velocity.z);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        canJump = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        canJump = false;
     }
 }
